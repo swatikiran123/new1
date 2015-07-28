@@ -1,0 +1,272 @@
+@(User2: Form[User2])
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ideation Portal - User Registration</title>
+
+
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/main.css")">
+<link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/bootstrap.min.css")">
+<link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/bootstrap-theme.min.css")">
+<link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/formValidation.css")">
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.8/jquery.validate.min.js"></script>
+<script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery.validate/1.7/additional-methods.js"></script>
+
+<script type="text/javascript">
+
+
+$(document).ready(function () {
+
+    $('#validation').validate({ // initialize the plugin
+        errorElement: 'div', 
+        rules: {
+            "password": {
+                required: true,
+                minlength: 5
+               },
+            "confirmpassword": {
+                required: true,
+                equalTo: "#password"
+            },
+            "firstName":{
+                 required: true,
+                 lettersonly: true
+             },
+            "lastName":{
+                 required: true,
+                 lettersonly: true
+             },
+            "phonenumber": {
+                    required: true,
+                    number: true,
+                    minlength:10,
+                    maxlength:10
+                },
+               "date" : {
+                    required: true,
+                },
+                "month": {
+                    required: true,
+                },
+                "year": {
+                    required: true,
+                },
+             "PostalAddress":{
+                 required: true,
+             },
+               
+             "ZipCode": {
+                    required: true,
+                    number: true,
+                    minlength:6
+                 }, 
+                "gender":{
+                     required: true,
+                 },
+                 "agree": {
+                     required: true,
+                    }
+        },
+
+ 
+   
+highlight: function(element) {
+    $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+    $(element).parent().find('.form-control-feedback').removeClass('glyphicon-ok').addClass('glyphicon-remove');
+},
+unhighlight: function(element) {
+     $(element).closest('.form-group').removeClass('has-error').addClass('has-success');
+     $(element).parent().find('.form-control-feedback').removeClass('glyphicon-remove').addClass('glyphicon-ok');
+},
+
+   messages:  {
+        
+        password: {
+            required: "Please provide a password",
+            minlength: "Your password must be at least 5 characters long"
+            
+        },
+        confirmpassword: {
+            required: "Please provide a confirm password",
+            equalTo: "Please enter the same password as above"
+            },
+            firstName: {
+                required:  "Please provide firstName",
+                lettersonly:'please dont give space or special expressions before your name'
+            },
+            lastName: {
+                required:  "Please provide lastName",
+                lettersonly:'please dont give space or special expressions before your name'
+            },
+            phonenumber: {
+                required: "Please enter your valid phoneNumber.",
+                number:'Please provide numeric digits only.',
+                minlength:'Please provide 10 digit phoneNumber',
+                maxlength:'Please provide 10 digit phoneNumber',
+
+             },
+             date:{
+                 required:  "Please provide date",
+                },
+            month:{
+                 required:  "Please provide month",
+                },
+            year:{
+                     required:  "Please provide year",
+                    },
+             PostalAddress:{
+                required:  "Please provide  PostalAddress",
+            },
+            ZipCode: {
+                required: "Please enter your valid zipCode.",
+                number:'Please provide numeric digits only.',
+                minlength:'Please provide 6 digit zipCode'
+            },
+            gender: {
+                required:  "Please provide a valid gender",
+            },
+            agree: {
+                required:  "You must agree terms and conditions",
+            }
+            
+            }
+            });
+});
+</script>
+
+</head>
+<body>
+    <div class="container">
+   <!-- <h1>Sign Up</h1>-->
+   <div class="jumbotron">
+  <h1><center>UPDATE DETAILS</center></h1>
+  </div>
+
+   <form class="form-horizontal" id="validation" name="validation" action="/register/userListupdated.scala.html" method="POST">
+       <p>please enter your email id</p>
+        <div class="form-group">
+      <label for="email">Email:</label>
+      <input type="email" class="form-control" id="updateUser" placeholder="Enter email" name="updateUser">
+    </div>
+    
+    <p>please enter ur details to get updated</p>
+        <div class="form-group has-feedback">
+            <label class="control-label col-xs-3" for="password">Password:</label>
+            <div class="col-xs-6">
+                <input type="password" class="form-control" id="password" placeholder="password" name="password">
+                <span class="glyphicon form-control-feedback" id="pwd1"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-xs-3" for="confirmpassword">Confirm Password:</label>
+            <div class="col-xs-6">
+                <input type="password" class="form-control" id="confirmpassword" placeholder="confirmpassword" name="confirmpassword">
+            </div>
+        </div>
+           <div class="form-group has-feedback">
+            <label class="control-label col-xs-3" for="firstName">First Name:</label>
+            <div class="col-xs-6">
+                <input type="text" class="form-control" id="firstName" placeholder="firstName" name="firstName">
+                <span class="glyphicon form-control-feedback" id="firstname1"></span>
+            </div>
+        </div>
+       <div class="form-group has-feedback">
+            <label class="control-label col-xs-3" for="lastName">Last Name:</label>
+            <div class="col-xs-6">
+                <input type="text" class="form-control" id="lastName" placeholder="lastName" name="lastName">
+                <span class="glyphicon form-control-feedback" id="lastname1"></span>
+            </div>
+        </div>
+         <div class="form-group has-feedback">
+            <label class="control-label col-xs-3" for="phoneNumber">Phonenumber:</label>
+            <div class="col-xs-6">
+                <input type="text" class="form-control" id="phoneNumber" placeholder="phonenumber" name="phonenumber">
+                 <span class="glyphicon form-control-feedback" id="phone1"></span>
+            </div>
+        </div>
+         <div class="form-inline">
+                <label class="control-label col-xs-3">Date of Birth:</label>
+                <div class="col-xs-9">
+                    <select name="date" id="date" class="form-control">
+                        <option value="">date</option>
+                        <option value="1">01</option>
+                        <option value="2">02</option>
+                        <option value="3">03</option>
+                         <option value="4">04</option>
+                    </select>
+                    <select name="month" id="month" class="form-control">
+                        <option value="">month</option>
+                        <option value="1">jan</option>
+                        <option value="2">feb</option>
+                        <option value="3">march</option>
+                         <option value="4">april</option>
+                    </select>
+                    <select name="year" id="year" class="form-control">
+                        <option value="">year</option>
+                        <option value="1">1966</option>
+                        <option value="2">1965</option>
+                        <option value="3">1964</option>
+                         <option value="4">1963</option>
+                    </select>
+                </div>
+        </div><br><br>
+       
+         <div class="form-group has-feedback">
+            <label class="control-label col-xs-3" for="postalAddress">Address:</label>
+            <div class="col-xs-6">
+                <textarea rows="3" class="form-control" id="postalAddress" name="PostalAddress" placeholder="Postal Address"></textarea>
+                <span class="glyphicon form-control-feedback" id="postaladdress1"></span>
+            </div>
+        </div>
+       
+        <div class="form-group">
+            <label class="control-label col-xs-3" for="ZipCode">Zip Code:</label>
+            <div class="col-xs-6">
+                <input type="text" class="form-control" id="ZipCode" name="ZipCode" placeholder="ZipCode">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-xs-3">Gender:</label>
+            <br>
+            <div class="col-xs-2"><br>
+                <label class="radio-inline">
+                    <input type="radio" name="gender" value="male"> Male
+                </label>
+            </div>
+            <div class="col-xs-2">
+                <label class="radio-inline">
+                    <input type="radio" name="gender" value="female"> Female
+                </label>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-xs-offset-3 col-xs-9">
+                <label class="checkbox-inline">
+                    <input type="checkbox" name="news" value="news"> Send me latest news and updates.
+                </label>
+            </div>
+        </div>
+          <div class="form-group">
+            <div class="col-xs-offset-3 col-xs-9">
+                <label class="checkbox-inline">
+                    <input type="checkbox" name="agree" value="agree">  I agree to the <a href="#">Terms and Conditions</a>.
+                </label>
+            </div>
+        </div>
+       
+        <button type="submit" >Submit</button>
+        <button onclick="myFunction()">refresh</button>
+        </form>
+</div>
+<script>
+function myFunction() {
+    location.reload();
+}
+</script>
+</body>
+</html>
